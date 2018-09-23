@@ -1,15 +1,4 @@
 document.getElementById("button1").addEventListener("click",loadUser);
-	function loadUsers() {
-		var xhr = new XMLHttpRequest();
-		console.log("abc");
-		xhr.open("GET","https://api.github.com/users",true);
-		xhr.onload = function(){
-			var users = JSON.parse(this.responseText);
-			// console.log(users);
-			document.getElementById("p1").innerHTML = users[0].login;
-		}
-		xhr.send();
-	}
 	function loadUser(){
 		var xhr = new XMLHttpRequest();
 		var input = document.getElementById('t1').value;
@@ -21,21 +10,35 @@ document.getElementById("button1").addEventListener("click",loadUser);
 		}
 		console.log(url);
 		if(url != ""){
-			console.log("ok");
 			var xhr = new XMLHttpRequest();
 			xhr.open("GET",url,true);
 			xhr.onload = function () {
 				var userinfo = JSON.parse(this.responseText);
 				// document.getElementById("info").value = userinfo.id;
+				if(userinfo.message =="Not Found"){
+					alert("查询用户不存在！");
+				}
+				else{
 				var output = `
-					<div>
+					<div align="left" class="child">
 						<img src="${userinfo.avatar_url}" width="230px" height="230px">
 						<ur>
-							<li>ID:${userinfo.login}</li>
+							<li>Name:${userinfo.name}</li>
+							<li>Login:${userinfo.login}</li>
+							<li>Id:${userinfo.id}</li>
+							<li>Node_id:${userinfo.node_id}</li>
+							<li>Login:${userinfo.login}</li>
+							<li>Followers:${userinfo.followers}</li>
+							<li>Following:${userinfo.following}</li>
+							<li>CreatTime:${userinfo.created_at}</li>
+							<li>UpdateTime:${userinfo.updated_at}</li>
+
 						</ur>
 					</div>
 				`
 				document.getElementById("info").innerHTML = output;
+			}
+				document.getElementById('t1').value = "";
 			}
 			xhr.send();
 		}
