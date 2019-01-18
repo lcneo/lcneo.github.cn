@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div>
+		<h2 id="ip"></h2>
+		<h2 id="userAgent"></h2>
+	</div>
+
+	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+
+	<script type="text/javascript">
+		document.getElementById("ip").innerHTML = returnCitySN["cip"] + ',' + returnCitySN["cname"]
+		document.getElementById("userAgent").innerHTML = "UserAgent: " + navigator.userAgent
+	</script>
+
+</body>
+</html>
